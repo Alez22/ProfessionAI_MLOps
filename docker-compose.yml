@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # 1. FastAPI Application
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    container_name: reputation_api
+    # Ensure API starts before Prometheus tries to scrape it
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 2. Prometheus (Metric Collector)
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    depends_on:
+      - api
+
+  # 3. Grafana (Dashboard Visualization)
+  grafana:
+    image: grafana/grafana-oss:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount the provisioning config to auto-connect Prometheus
+      - ./monitoring/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin  # Default password
+    depends_on:
+      - prometheus

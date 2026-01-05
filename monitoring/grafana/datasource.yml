@@ -1,0 +1,11 @@
+# Configuration to automatically add Prometheus as a data source in Grafana
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    # 'prometheus' is the hostname defined in docker-compose
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
