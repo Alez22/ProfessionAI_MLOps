@@ -28,8 +28,8 @@ class SentimentAnalyzer:
         
         # Perform inference
         output = self.model(**encoded_input)
-        scores = output[0][0].detach().numpy()
-        scores = softmax(scores) # Convert logits to probabilities
+        scores = output.logits[0].detach().numpy()
+        scores = softmax(scores)
 
         # Get the highest scoring label
         ranking = np.argsort(scores)

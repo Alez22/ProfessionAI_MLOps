@@ -6,3 +6,4 @@ prometheus-fastapi-instrumentator
 pytest
 httpx
 flake8
+numpy<2.0.0

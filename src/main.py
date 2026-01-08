@@ -65,5 +65,6 @@ def predict(request: SentimentRequest):
         return {"sentiment": label, "confidence": score}
     except Exception as e:
         # Log the error (in a real app) and return 500
-        print(f"Inference Error: {e}")
-        raise HTTPException(status_code=500, detail="Internal Model Error")
+
+        print(f"CRITICAL ERROR in inference: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
