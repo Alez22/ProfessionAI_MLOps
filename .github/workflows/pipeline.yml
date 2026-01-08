@@ -63,6 +63,7 @@ jobs:
       # Verifies that the API responds correctly (200 OK) to valid requests
       - name: Run Integration Tests (Pytest)
         run: |
+          export PYTHONPATH=$PYTHONPATH:.
           pytest tests/test_api.py
 
       # 6. Simulate Traffic (Load Test)
