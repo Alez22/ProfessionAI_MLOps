@@ -38,7 +38,7 @@ jobs:
       - name: Start Docker Stack
         run: |
           echo "Building and starting containers..."
-          docker-compose up -d --build
+          docker compose up -d --build
           
           echo "Waiting for services to initialize..."
           sleep 15  # Wait for RoBERTa model to load into memory
@@ -73,7 +73,7 @@ jobs:
       # Stop containers to clean up resources, even if previous steps failed
       - name: Stop Containers
         if: always()
-        run: docker-compose down
+        run: docker compose down
 
   # ------------------------------------------------------------------
   # JOB 2: CONTINUOUS DEPLOYMENT (CD)
