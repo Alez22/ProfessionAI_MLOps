@@ -1,0 +1,110 @@
+name: MLOps End-to-End Pipeline
+
+# Trigger the pipeline on push or pull request to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # ------------------------------------------------------------------
+  # JOB 1: CI & MONITORING
+  # Builds Docker, runs tests, simulates traffic, and checks for drift
+  # ------------------------------------------------------------------
+  build-test-monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Checkout the repository code
+      - uses: actions/checkout@v3
+
+      # 2. Set up Python environment (needed for helper scripts)
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      # 3. Install dependencies
+      # We install requirements for the scripts + testing tools
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest requests
+
+      # 4. Build and Start the Docker Stack
+      # This includes FastAPI (API), Prometheus (Metrics), and Grafana (Dashboards)
+      - name: Start Docker Stack
+        run: |
+          echo "Building and starting containers..."
+          docker-compose up -d --build
+          
+          echo "Waiting for services to initialize..."
+          sleep 15  # Wait for RoBERTa model to load into memory
+          
+          # Check running containers
+          docker ps -a
+
+      # 5. Run Integration Tests
+      # Verifies that the API responds correctly (200 OK) to valid requests
+      - name: Run Integration Tests (Pytest)
+        run: |
+          pytest tests/test_api.py
+
+      # 6. Simulate Traffic (Load Test)
+      # Sends requests to the running API to generate metrics in Prometheus
+      - name: Run Load Test & Populate Metrics
+        run: |
+          python tests/load_test.py
+
+      # 7. Drift Detection & Retraining Trigger
+      # Checks model accuracy/metrics. If low, triggers the Retraining Workflow via API.
+      - name: Check for Model Drift
+        env:
+          # Secret required to trigger the 'retraining.yml' workflow
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python src/drift_detector.py
+
+      # 8. Teardown
+      # Stop containers to clean up resources, even if previous steps failed
+      - name: Stop Containers
+        if: always()
+        run: docker-compose down
+
+  # ------------------------------------------------------------------
+  # JOB 2: CONTINUOUS DEPLOYMENT (CD)
+  # Deploys the code to Hugging Face Spaces if CI passed
+  # ------------------------------------------------------------------
+  deploy-to-huggingface:
+    needs: build-test-monitor  # Only run if Job 1 passed successfully
+    runs-on: ubuntu-latest
+    # Only deploy when pushing to 'main', not on PRs
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true # Enable Large File Storage if needed
+      
+      - name: Push to Hugging Face Hub
+        env:
+          # HF_TOKEN must be set in GitHub Repo Settings -> Secrets
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          # CHANGE THESE TO YOUR ACTUAL HUGGING FACE DETAILS
+          HF_USERNAME: "TUO_USERNAME_HF"      # <--- CAMBIA QUESTO
+          SPACE_NAME: "reputation-monitor"    # <--- CAMBIA QUESTO
+        run: |
+          echo "Deploying to Hugging Face Space..."
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          
+          # Add the Hugging Face remote repository
+          git remote add space https://$HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/$HF_USERNAME/$SPACE_NAME
+          
+          # Force push to sync content
+          git push --force space main

@@ -1,0 +1,167 @@
+[4.0K]  .
+├── [4.0K]  .git
+│   ├── [  18]  COMMIT_EDITMSG
+│   ├── [ 104]  FETCH_HEAD
+│   ├── [  21]  HEAD
+│   ├── [  41]  ORIG_HEAD
+│   ├── [ 415]  config
+│   ├── [  73]  description
+│   ├── [4.0K]  hooks
+│   │   ├── [ 478]  applypatch-msg.sample
+│   │   ├── [ 896]  commit-msg.sample
+│   │   ├── [4.6K]  fsmonitor-watchman.sample
+│   │   ├── [ 360]  post-checkout
+│   │   ├── [ 356]  post-commit
+│   │   ├── [ 354]  post-merge
+│   │   ├── [ 189]  post-update.sample
+│   │   ├── [ 424]  pre-applypatch.sample
+│   │   ├── [1.6K]  pre-commit.sample
+│   │   ├── [ 416]  pre-merge-commit.sample
+│   │   ├── [ 350]  pre-push
+│   │   ├── [1.3K]  pre-push.sample
+│   │   ├── [4.8K]  pre-rebase.sample
+│   │   ├── [ 544]  pre-receive.sample
+│   │   ├── [1.5K]  prepare-commit-msg.sample
+│   │   ├── [2.7K]  push-to-checkout.sample
+│   │   ├── [2.3K]  sendemail-validate.sample
+│   │   └── [3.6K]  update.sample
+│   ├── [1.5K]  index
+│   ├── [4.0K]  info
+│   │   └── [ 240]  exclude
+│   ├── [4.0K]  lfs
+│   │   ├── [4.0K]  cache
+│   │   └── [4.0K]  tmp
+│   ├── [4.0K]  logs
+│   │   ├── [1.2K]  HEAD
+│   │   └── [4.0K]  refs
+│   ├── [4.0K]  objects
+│   │   ├── [4.0K]  11
+│   │   ├── [4.0K]  16
+│   │   ├── [4.0K]  1d
+│   │   ├── [4.0K]  21
+│   │   ├── [4.0K]  23
+│   │   ├── [4.0K]  29
+│   │   ├── [4.0K]  2d
+│   │   ├── [4.0K]  3f
+│   │   ├── [4.0K]  43
+│   │   ├── [4.0K]  46
+│   │   ├── [4.0K]  51
+│   │   ├── [4.0K]  5d
+│   │   ├── [4.0K]  69
+│   │   ├── [4.0K]  6d
+│   │   ├── [4.0K]  70
+│   │   ├── [4.0K]  72
+│   │   ├── [4.0K]  86
+│   │   ├── [4.0K]  98
+│   │   ├── [4.0K]  9a
+│   │   ├── [4.0K]  a0
+│   │   ├── [4.0K]  aa
+│   │   ├── [4.0K]  b3
+│   │   ├── [4.0K]  c8
+│   │   ├── [4.0K]  ce
+│   │   ├── [4.0K]  d1
+│   │   ├── [4.0K]  dd
+│   │   ├── [4.0K]  e0
+│   │   ├── [4.0K]  e2
+│   │   ├── [4.0K]  e6
+│   │   ├── [4.0K]  e8
+│   │   ├── [4.0K]  e9
+│   │   ├── [4.0K]  f2
+│   │   ├── [4.0K]  f3
+│   │   ├── [4.0K]  fb
+│   │   ├── [4.0K]  info
+│   │   └── [4.0K]  pack
+│   ├── [ 112]  packed-refs
+│   └── [4.0K]  refs
+│       ├── [4.0K]  heads
+│       ├── [4.0K]  remotes
+│       └── [4.0K]  tags
+├── [4.0K]  .github
+│   ├── [2.5K]  copilot-instructions.md
+│   └── [4.0K]  workflows
+│       ├── [ 731]  ci.yml
+│       └── [ 928]  scheduled_retrain.yml
+├── [4.6K]  .gitignore
+├── [4.0K]  .pytest_cache
+│   ├── [  37]  .gitignore
+│   ├── [ 191]  CACHEDIR.TAG
+│   ├── [ 302]  README.md
+│   └── [4.0K]  v
+│       └── [4.0K]  cache
+├── [ 520]  Dockerfile
+├── [1.4K]  README.md
+├── [   0]  clipboard.txt
+├── [1.7K]  docker-compose.yml
+├── [4.0K]  monitoring
+│   ├── [4.0K]  grafana
+│   │   └── [ 295]  datasource.yml
+│   └── [ 175]  prometheus.yml
+├── [  94]  requirements.txt
+├── [4.0K]  src
+│   ├── [4.0K]  __pycache__
+│   │   ├── [ 143]  __init__.cpython-312.pyc
+│   │   ├── [1.1K]  data.cpython-312.pyc
+│   │   ├── [3.4K]  evaluate.cpython-312.pyc
+│   │   ├── [1006]  fakes.cpython-312.pyc
+│   │   ├── [2.5K]  main.cpython-312.pyc
+│   │   ├── [2.2K]  model.cpython-312.pyc
+│   │   └── [9.0K]  train.cpython-312.pyc
+│   ├── [2.0K]  drift_detector.py
+│   ├── [2.1K]  main.py
+│   └── [1.5K]  model.py
+├── [4.0K]  tests
+│   ├── [4.0K]  __pycache__
+│   │   ├── [ 145]  __init__.cpython-312.pyc
+│   │   ├── [6.5K]  test_api.cpython-312-pytest-9.0.1.pyc
+│   │   ├── [6.5K]  test_api.cpython-312-pytest-9.0.2.pyc
+│   │   ├── [4.3K]  test_retrain.cpython-312-pytest-9.0.1.pyc
+│   │   ├── [4.3K]  test_retrain.cpython-312-pytest-9.0.2.pyc
+│   │   ├── [4.9K]  test_train.cpython-312-pytest-9.0.1.pyc
+│   │   └── [4.9K]  test_train.cpython-312-pytest-9.0.2.pyc
+│   ├── [1.2K]  load_test.py
+│   └── [2.1K]  test_api.py
+└── [4.0K]  venv
+    ├── [4.0K]  bin
+    │   ├── [8.8K]  Activate.ps1
+    │   ├── [2.0K]  activate
+    │   ├── [ 929]  activate.csh
+    │   ├── [2.2K]  activate.fish
+    │   ├── [ 219]  f2py
+    │   ├── [ 213]  fastapi
+    │   ├── [ 217]  flake8
+    │   ├── [ 224]  hf
+    │   ├── [ 207]  httpx
+    │   ├── [ 242]  huggingface-cli
+    │   ├── [ 208]  isympy
+    │   ├── [ 236]  normalizer
+    │   ├── [ 219]  numpy-config
+    │   ├── [ 251]  pip
+    │   ├── [ 251]  pip3
+    │   ├── [ 251]  pip3.12
+    │   ├── [ 224]  proton
+    │   ├── [ 224]  proton-viewer
+    │   ├── [ 224]  py.test
+    │   ├── [ 215]  pycodestyle
+    │   ├── [ 214]  pyflakes
+    │   ├── [ 218]  pygmentize
+    │   ├── [ 224]  pytest
+    │   ├── [  42]  python -> /home/codespace/.python/current/bin/python
+    │   ├── [   6]  python3 -> python
+    │   ├── [   6]  python3.12 -> python
+    │   ├── [ 234]  tiny-agents
+    │   ├── [ 232]  torchfrtrace
+    │   ├── [ 223]  torchrun
+    │   ├── [ 210]  tqdm
+    │   ├── [ 240]  transformers
+    │   ├── [ 248]  transformers-cli
+    │   └── [ 214]  uvicorn
+    ├── [4.0K]  include
+    │   └── [4.0K]  python3.12
+    ├── [4.0K]  lib
+    │   └── [4.0K]  python3.12
+    ├── [   3]  lib64 -> lib
+    ├── [ 247]  pyvenv.cfg
+    └── [4.0K]  share
+        └── [4.0K]  man
+
+70 directories, 95 files

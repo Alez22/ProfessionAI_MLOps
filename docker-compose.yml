@@ -1,40 +1,43 @@
 version: '3.8'
 
 services:
-  # 1. FastAPI Application
+  # 1. The Core Application (FastAPI + RoBERTa Model)
   api:
-    build: .
+    build: .                          # Builds the Dockerfile in current directory
+    container_name: reputation_api    # Fixed name for easy reference
     ports:
-      - "8000:8000"
-    container_name: reputation_api
-    # Ensure API starts before Prometheus tries to scrape it
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      - "8000:7860"                   # Maps Host Port 8000 to Container Port 7860 (HF standard)
+    healthcheck:                      # Checks if API is responsive
+      test: ["CMD", "curl", "-f", "http://localhost:7860/health"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  # 2. Prometheus (Metric Collector)
+  # 2. Metrics Collector (Prometheus)
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:latest     # Uses official image
+    container_name: prometheus
     ports:
-      - "9090:9090"
+      - "9090:9090"                   # Web UI for Prometheus
     volumes:
+      # Mount configuration file from local folder to container
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
+      # Tell Prometheus where config file is
       - '--config.file=/etc/prometheus/prometheus.yml'
     depends_on:
-      - api
+      - api                           # Wait for API to start before starting Prometheus
 
-  # 3. Grafana (Dashboard Visualization)
+  # 3. Visualization Dashboard (Grafana)
   grafana:
-    image: grafana/grafana-oss:latest
+    image: grafana/grafana-oss:latest # Uses official OSS image
+    container_name: grafana
     ports:
-      - "3000:3000"
+      - "3000:3000"                   # Web UI for Grafana
     volumes:
-      # Mount the provisioning config to auto-connect Prometheus
+      # Automate setup: Pre-configure Prometheus as data source
       - ./monitoring/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin  # Default password
+      - GF_SECURITY_ADMIN_PASSWORD=admin # Default password for development
     depends_on:
-      - prometheus
+      - prometheus                    # Grafana needs Prometheus to be ready
