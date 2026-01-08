@@ -1,7 +1,6 @@
 fastapi
 uvicorn
 transformers
-torch
 scipy
 prometheus-fastapi-instrumentator
 pytest

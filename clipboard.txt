@@ -1,6 +1,6 @@
 [4.0K]  .
 ├── [4.0K]  .git
-│   ├── [  18]  COMMIT_EDITMSG
+│   ├── [  24]  COMMIT_EDITMSG
 │   ├── [ 104]  FETCH_HEAD
 │   ├── [  21]  HEAD
 │   ├── [  41]  ORIG_HEAD
@@ -25,16 +25,17 @@
 │   │   ├── [2.7K]  push-to-checkout.sample
 │   │   ├── [2.3K]  sendemail-validate.sample
 │   │   └── [3.6K]  update.sample
-│   ├── [1.5K]  index
+│   ├── [1.4K]  index
 │   ├── [4.0K]  info
 │   │   └── [ 240]  exclude
 │   ├── [4.0K]  lfs
 │   │   ├── [4.0K]  cache
 │   │   └── [4.0K]  tmp
 │   ├── [4.0K]  logs
-│   │   ├── [1.2K]  HEAD
+│   │   ├── [1.6K]  HEAD
 │   │   └── [4.0K]  refs
 │   ├── [4.0K]  objects
+│   │   ├── [4.0K]  10
 │   │   ├── [4.0K]  11
 │   │   ├── [4.0K]  16
 │   │   ├── [4.0K]  1d
@@ -42,27 +43,40 @@
 │   │   ├── [4.0K]  23
 │   │   ├── [4.0K]  29
 │   │   ├── [4.0K]  2d
+│   │   ├── [4.0K]  3e
 │   │   ├── [4.0K]  3f
 │   │   ├── [4.0K]  43
 │   │   ├── [4.0K]  46
+│   │   ├── [4.0K]  4e
 │   │   ├── [4.0K]  51
+│   │   ├── [4.0K]  52
+│   │   ├── [4.0K]  53
 │   │   ├── [4.0K]  5d
+│   │   ├── [4.0K]  67
 │   │   ├── [4.0K]  69
 │   │   ├── [4.0K]  6d
 │   │   ├── [4.0K]  70
 │   │   ├── [4.0K]  72
+│   │   ├── [4.0K]  77
+│   │   ├── [4.0K]  80
 │   │   ├── [4.0K]  86
+│   │   ├── [4.0K]  8e
 │   │   ├── [4.0K]  98
 │   │   ├── [4.0K]  9a
+│   │   ├── [4.0K]  9b
 │   │   ├── [4.0K]  a0
+│   │   ├── [4.0K]  a5
 │   │   ├── [4.0K]  aa
+│   │   ├── [4.0K]  ae
 │   │   ├── [4.0K]  b3
+│   │   ├── [4.0K]  c5
 │   │   ├── [4.0K]  c8
 │   │   ├── [4.0K]  ce
 │   │   ├── [4.0K]  d1
 │   │   ├── [4.0K]  dd
 │   │   ├── [4.0K]  e0
 │   │   ├── [4.0K]  e2
+│   │   ├── [4.0K]  e4
 │   │   ├── [4.0K]  e6
 │   │   ├── [4.0K]  e8
 │   │   ├── [4.0K]  e9
@@ -77,10 +91,8 @@
 │       ├── [4.0K]  remotes
 │       └── [4.0K]  tags
 ├── [4.0K]  .github
-│   ├── [2.5K]  copilot-instructions.md
 │   └── [4.0K]  workflows
-│       ├── [ 731]  ci.yml
-│       └── [ 928]  scheduled_retrain.yml
+│       └── [3.9K]  pipeline.yml
 ├── [4.6K]  .gitignore
 ├── [4.0K]  .pytest_cache
 │   ├── [  37]  .gitignore
@@ -164,4 +176,4 @@
     └── [4.0K]  share
         └── [4.0K]  man
 
-70 directories, 95 files
+84 directories, 93 files
