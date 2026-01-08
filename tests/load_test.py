@@ -3,40 +3,39 @@ import time
 import random
 import sys
 
-# API Endpoint (running in Docker container)
 URL = "http://localhost:8000/predict"
 
 def generate_traffic():
-    """
-    Sends random requests to the API to generate Prometheus metrics.
-    """
-    print("--- Starting Load Test to populate Metrics ---")
+    print(f"--- Starting Load Test hitting {URL} ---")
     
-    test_data = [
-        "MachineInnovators is the best!",
-        "I hate this service, it is terrible.",
-        "Just a normal day at the office.",
-        "Support is very helpful.",
-        "App crashes all the time."
-    ]
+    test_data = ["Good service", "Bad error", "Normal day"]
 
-    # Send 20 requests to generate some history
-    for i in range(20):
+    success_count = 0
+    
+    for i in range(10): # Riduciamo a 10 per debug
         text = random.choice(test_data)
         try:
-            response = requests.post(URL, json={"text": text})
+            response = requests.post(URL, json={"text": text}, timeout=5)
+            
+            # --- DEBUG STAMPA ---
             if response.status_code == 200:
-                print(f"Request {i+1}: {response.json()['sentiment']}")
+                print(f"Req {i+1}: OK ({response.json()['sentiment']})")
+                success_count += 1
             else:
-                print(f"Request {i+1}: Failed")
+                # STAMPIAMO L'ERRORE VERO
+                print(f"Req {i+1}: FAILED. Status: {response.status_code}")
+                print(f"Body: {response.text}")
+                
         except Exception as e:
-            print(f"Connection Error: {e}")
-            sys.exit(1)
+            print(f"Req {i+1}: CONNECTION ERROR: {e}")
         
-        # Small sleep to simulate real traffic time
-        time.sleep(0.1)
+        time.sleep(0.5)
 
-    print("--- Load Test Complete. Metrics updated in Prometheus. ---")
+    if success_count == 0:
+        print("CRITICAL: All requests failed.")
+        sys.exit(1) # Fail the pipeline
+    else:
+        print("--- Load Test Complete ---")
 
 if __name__ == "__main__":
     generate_traffic()
