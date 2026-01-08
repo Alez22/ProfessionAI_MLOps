@@ -57,7 +57,7 @@ def predict(request: SentimentRequest):
     Receives text -> Returns sentiment (Positive/Neutral/Negative).
     """
     if not request.text:
-        raise HTTPException(status_code=400, detail="Input text cannot be empty.")
+        raise HTTPException(status_code=400, detail="Text cannot be empty")
 
     try:
         # Perform inference using the pre-loaded model
