@@ -1,0 +1,42 @@
+name: Automated Model Retraining
+
+on:
+  # Questo workflow parte SOLO quando riceve il segnale 'model_performance_alert'
+  repository_dispatch:
+    types: [model_performance_alert]
+  
+  # O se lo lanci a mano
+  workflow_dispatch:
+
+jobs:
+  retrain_model:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Simulate Retraining Process
+        run: |
+          echo "============================================="
+          echo "🚨 ALERT RECEIVED: Performance Drift Detected"
+          echo "Payload Message: ${{ github.event.client_payload.message }}"
+          echo "Current Accuracy: ${{ github.event.client_payload.accuracy }}"
+          echo "============================================="
+          
+          echo "1. Fetching new data from Data Lake..."
+          sleep 2
+          
+          echo "2. Fine-tuning RoBERTa model..."
+          sleep 5
+          
+          echo "3. Evaluating new model..."
+          echo "New Model Accuracy: 0.94 (+19% improvement)"
+          
+          echo "4. Saving artifacts to Model Registry..."
+          sleep 2
+          
+          echo "✅ SUCCESS: New model version deployed."
