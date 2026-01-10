@@ -5,7 +5,7 @@ import random
 
 # CONFIGURATION
 # In a real app, use os.getenv('GITHUB_TOKEN')
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN") 
+GITHUB_TOKEN = os.getenv("GH_PAT") 
 REPO_OWNER = "Alez22"     
 REPO_NAME = "ProfessionAI_MLOps"            
 THRESHOLD = 0.85
