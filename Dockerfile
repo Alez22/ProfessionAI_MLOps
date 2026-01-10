@@ -8,8 +8,9 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install dependencies
+RUN pip install --no-cache-dir --upgrade pip
 # This avoid to install GPU version of torch that is large in size
-RUN pip install --no-cache-dir "torch>=2.6.0" --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
 # We use --no-cache-dir to keep image small
 RUN pip install --no-cache-dir -r requirements.txt
 
